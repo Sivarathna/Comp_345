@@ -12,20 +12,28 @@ class Map
 private:
 	vector<City*> cityList;
 	City* firstCity;
-public:
-	static int availableRedHouses;
-	static int availableGreenHouses;
-	static int availableBlueHouses;
-	static int availablePurpleHouses;
-	static int availableOrangeHouses;
-	static int availableYellowHouses;
-	static int availableCoal;
-	static int availableOil;
-	static int availableGarbage;
-	static int availableUranium;
-	static int availableElektro;
 	Map();
+
+
+
+	static Map* m_pInstance;
+public:
+
+	int availableRedHouses = 22;
+	int availableGreenHouses = 22;
+	int availableBlueHouses = 22;
+	int availablePurpleHouses = 22;
+	int availableOrangeHouses = 22;
+	int availableYellowHouses = 22;
+	int availableCoal = 24;
+	int availableOil = 24;
+	int availableGarbage = 24;
+	int availableUranium = 12;
+	int availableElektro = 100000;
+
 	~Map();
+	static Map* Instance();
+
 	void addCity(City* city);
 	void removeCity(City* city);
 	const void connectCity(City* city1, City* city2);

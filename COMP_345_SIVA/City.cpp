@@ -48,32 +48,32 @@ string City::getCityStatus() {
 
 void City::placeRedHouse() {
 	redHouse = 1;
-	Map::availableRedHouses -=1;
+	Map::Instance()->availableRedHouses -=1;
 }
 
 void City::placeGreenHouse() {
 	greenHouse = 1;
-	Map::availableGreenHouses -= 1;
+	Map::Instance()->availableGreenHouses -= 1;
 }
 
 void City::placeBlueHouse() {
 	blueHouse = 1;
-	Map::availableBlueHouses -= 1;
+	Map::Instance()->availableBlueHouses -= 1;
 }
 
 void City::placePurpleHouse() {
 	purpleHouse = 1;
-	Map::availablePurpleHouses -= 1;
+	Map::Instance()->availablePurpleHouses -= 1;
 }
 
 void City::placeOrangeHouse() {
 	orangeHouse = 1;
-	Map::availableOrangeHouses -= 1;
+	Map::Instance()->availableOrangeHouses -= 1;
 }
 
 void City::placeYellowHouse() {
 	yellowHouse = 1;
-	Map::availableYellowHouses -= 1;
+	Map::Instance()->availableYellowHouses -= 1;
 }
 
 void City::addAdjacentCity(City* city)

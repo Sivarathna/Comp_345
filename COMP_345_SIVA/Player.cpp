@@ -102,26 +102,26 @@ void Player::getPlayerInfo()
 
 void Player::assignOil(int num) {
 	this->oil = oil + num;
-	Map::availableOil = Map::availableOil - num;
+	Map::Instance()->availableOil = Map::Instance()->availableOil - num;
 }
 
 void Player::assignGarbage(int num) {
 	this->garbage = garbage + num;
-	Map::availableGarbage = Map::availableGarbage - num;
+	Map::Instance()->availableGarbage = Map::Instance()->availableGarbage - num;
 }
 
 void Player::assignCoal(int num) {
 	this->coal = coal + num;
-	Map::availableCoal = Map::availableCoal - num;
+	Map::Instance()->availableCoal = Map::Instance()->availableCoal - num;
 }
 
 void Player::assignUranium(int num) {
 	this->uranium = uranium + num;
-	Map::availableUranium = Map::availableUranium - num;
+	Map::Instance()->availableUranium = Map::Instance()->availableUranium - num;
 }
 
 void Player::assignElektro(int num) {
 	this->elektro = elektro + num;
-	Map::availableElektro = Map::availableElektro - num;
+	Map::Instance()->availableElektro = Map::Instance()->availableElektro - num;
 }
 

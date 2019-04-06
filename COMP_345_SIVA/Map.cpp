@@ -9,6 +9,20 @@
 
 using namespace std;
 
+//global static pointer used to ensure we have a single instance of the class
+Map* Map::m_pInstance = nullptr;
+
+//this function is called to create an instance of the class.
+//Calling the constructor publicly is not allowed
+//The constructor is private and is only called by this Instance function
+
+Map* Map::Instance() {
+	if (!m_pInstance)//only allow one instance of class to be generated
+		m_pInstance = new Map;
+
+	return m_pInstance;
+}
+
 Map::Map()
 {
 }

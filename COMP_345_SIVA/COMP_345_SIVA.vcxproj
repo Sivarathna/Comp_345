@@ -34,7 +34,7 @@
     <ClInclude Include="PowerPlant.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="data - fresh copy.txt" />
+    <Text Include="data_fresh_copy.txt" />
     <Text Include="data.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
