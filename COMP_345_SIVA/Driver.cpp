@@ -149,8 +149,56 @@ int main()
 	// creating a Map
 	Map map = Map();
 
-/*
-	// PART 1 START 
+
+	//Select and load a map from list of files in a directory
+	//To do
+
+
+
+	int number_of_players = 0;
+	int player_area;
+	string player_name;
+	vector<Player> players;
+
+	//Get the number of players (2-6 players)
+	while (number_of_players < 2 || number_of_players >6) {
+		cout << "Enter the number of players for this game (2-6 players): ";
+		cin >> number_of_players;
+
+	}
+
+	for (int i = 0; i < number_of_players; i++) {
+		cout << "Enter a name for player:" << i + 1 << endl;
+		cin >> player_name;
+		players.push_back(Player(player_name));
+
+	}
+
+	//Each player chooses which area they will play in. 
+	cout << "Choose an area to play in. There are a total number of 6 areas to choose from.\n";
+	for (int i = 0; i < players.size(); i++) {
+		cout << players.at(i).getName() << " , choose your area: "<<endl;
+		cin >> player_area;
+		players.at(i).setArea(player_area);
+	}
+
+
+	cout << "Players get ready to play!!!\n";
+	cout << "--------- THE PLAYERS ARE --------" << endl;
+	for (int i = 0; i < players.size(); i++) {
+		cout << "Player: " << players.at(i).getName();
+		cout << ">>> Area: " << players.at(i).getArea() << endl;
+	}
+	cout << "-----------------------------------" << endl;
+	cout << endl;
+
+
+
+
+	/*
+	//ASSIGNMENT 1 PART 1 START
+
+
 	Player Johnathan = Player("Johnathan");
 	Player Micheal = Player("Micheal");
 	Player Austin = Player("Austin");
@@ -229,7 +277,7 @@ int main()
 		system("PAUSE");
 		return 1;
 	}
-	// PART 1 END 
+	// PART 1 END
 */
 /*
 	// PART 2 START
@@ -285,11 +333,11 @@ int main()
 		+ " | Elektro: " + std::to_string(Map::availableElektro));
 	cout << availRes;
 
-	
-	
+
+
 	cout << "\n\n***Saving city and resource status onto the game map (check txt file)\n";
 	std::ofstream out;
-	
+
 	out.open("data.txt", std::ios::app);
 	for (int i = 0; i < cityList.size(); i++) {
 		std::string str = (cityList[i]->getCityStatus());
@@ -309,7 +357,7 @@ int main()
 
 	Player part4player = Player("Scott", "orange");
 	cout << "***Lets see which cities Scott owns using our printPlayerNetwork() method";
-	
+
 	printPlayerNetwork(part4player, cityList);
 
 	cout << "\n\n***Lets assign Scott some resources plus Elektros and print his status:\n\n";
@@ -329,14 +377,14 @@ int main()
 	//PART 5 (Depends on Part 4)
 
 	cout << "\n\n***PART 5\n";
-	
+
 	//Creating the 43 powerplant cards
 
-	
-	//CARD NUMBER 0 IS THE PHASE 3/STEP 3 CARD. 
+
+	//CARD NUMBER 0 IS THE PHASE 3/STEP 3 CARD.
 
 	//for loop creates the powerplant cards only(1 to 43) and pushes them to the deck vector (deck vector created at the top of this file)
-	for (int i = 1; i <= 43; i++) 
+	for (int i = 1; i <= 43; i++)
 	{
 		PowerPlant* plant = new PowerPlant(i);
 		deck.push_back(plant);
@@ -360,21 +408,21 @@ int main()
 
 	cout << "\n\n***Printing deck after inserting the Step 3 Card (Card number 0) at the bottom of the deck:\n\n";
 	printDeck();
-	
+
 
 
 	cout << "\n\n***Now we are taking the top powerplant of the deck and assigning it to player John and using getOwner() method:\n\n";
 	Player* player1 = new Player("John");
-	
+
 	int topCard = deck.size() - 1;
 	deck[topCard]->setOwner(player1);
 	cout << "The owner of powerplant number "<< deck[topCard]->getPlantNumber() <<" is: " << deck[topCard]->getOwner()->getName();
 
 
-	//Creating and assigning the overview cards	
+	//Creating and assigning the overview cards
 
 	//Lets create two overview cards for a 2 player game. I'll assign one of them to John since he's already created.
-	
+
 	vector<OverviewCard*> players; //storage for overview card pointers. Basically where all the players lie. We will probably use this vector in the future to determine/switch player order etc.
 
 	OverviewCard* idCard1 = new OverviewCard(1);

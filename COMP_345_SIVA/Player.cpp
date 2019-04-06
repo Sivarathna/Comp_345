@@ -17,7 +17,7 @@ Player::Player()
 
 Player::Player(string playerName)
 {
-	
+
 	name = playerName;
 	elektro = 0;
 	coal = 0;
@@ -50,6 +50,15 @@ string Player::getName() const
 {
 	return name;
 }
+
+int Player::getArea() {
+	return area;
+}
+
+void Player::setArea(int player_area) {
+	area = player_area;
+}
+
 
 int Player::getElektro()
 {

@@ -7,6 +7,7 @@ class Player
 private:
 	string name;
 	string color;
+	int area;
 	int elektro;
 	int coal;
 	int garbage;
@@ -19,6 +20,8 @@ public:
 	string getHouseColor();
 	~Player();
 	string getName() const;
+	int getArea();
+	void setArea(int a);
 	int getElektro();
 	
 	int getCoal();
