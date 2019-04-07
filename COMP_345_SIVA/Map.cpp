@@ -25,6 +25,45 @@ Map* Map::Instance() {
 
 Map::Map()
 {
+	for (int i = 0; i < Color::COLOR_COUNT; i++) {
+		this->SetAvailableHouses((Color)i, 22);
+	}
+
+	for (int i = 0; i < Resource::RESOURCE_COUNT; i++) {
+		this->SetAvailableResource((Resource)i, 24);
+	}
+	this->SetAvailableResource(Resource::Uranium, 12);
+	this->SetAvailableResource(Resource::Elektro, 100000);
+}
+
+int Map::GetAvailableHouses(Color c)
+{
+	if (c == Color::COLOR_COUNT) {
+		throw;
+	}
+	return this->availableHouses[c];
+}
+
+void Map::SetAvailableHouses(Color c, int amount)
+{
+	if (c == Color::COLOR_COUNT) {
+		throw;
+	}
+	this->availableHouses[c] = amount;
+}
+
+int Map::GetAvailableResource(Resource r) {
+	if (r == Resource::RESOURCE_COUNT) {
+		throw;
+	}
+	return this->availableResource[r];
+}
+
+void Map::SetAvailableResource(Resource r, int num) {
+	if (r == Resource::RESOURCE_COUNT) {
+		throw;
+	}
+	this->availableResource[r] = num;
 }
 
 

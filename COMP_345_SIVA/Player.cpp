@@ -1,44 +1,20 @@
 #include "Player.h"
 #include"Map.h"
-
 #include<string>
 
-
-Player::Player()
-{
-	name = "";
-	elektro = 0;
-	coal = 0;
-	garbage = 0;
-	oil = 0;
-	uranium = 0;
-
-}
-
-Player::Player(string playerName)
-{
-
-	name = playerName;
-	elektro = 0;
-	coal = 0;
-	garbage = 0;
-	oil = 0;
-	uranium = 0;
-}
-
-Player::Player(string playerName, string houseColor)
+Player::Player(string playerName, Color houseColor)
 {
 
 	name = playerName;
 	color = houseColor;
-	elektro = 0;
-	coal = 0;
-	garbage = 0;
-	oil = 0;
-	uranium = 0;
+
+	for (int i = 0; i < Resource::RESOURCE_COUNT; i++) {
+		this->resources[i] = 0;
+	}
+	this->setResource(Resource::Elektro, 100);
 }
 
-string Player::getHouseColor() {
+Color Player::getHouseColor() {
 	return this->color;
 }
 
@@ -59,58 +35,28 @@ void Player::setArea(int player_area) {
 	area = player_area;
 }
 
-int Player::getElektro()
-{
-	return this->elektro;
-}
-
-int Player::getCoal()
-{
-	return this->coal;
-}
-
-int Player::getGarbage()
-{
-	return this->garbage;
-}
-
-int Player::getOil()
-{
-	return this->oil;
-}
-
-int Player::getUranium()
-{
-	return this->uranium;
-}
-
 void Player::getPlayerInfo()
 {
-	std::cout << "Player Name: " << name << "\nColor: " << color << "\nElektro: " << elektro << "\nCoal: " << coal << "\nGarbage: " << garbage << "\nOil: " << oil << "\nUranium: " << uranium << std::endl;
+	std::cout << "Player Name: " << name
+		<< "\nColor: " << color
+		<< "\nElektro: " << this->getResource(Resource::Elektro)
+		<< "\nCoal: " << this->getResource(Resource::Coal)
+		<< "\nGarbage: " << this->getResource(Resource::Garbage)
+		<< "\nOil: " << this->getResource(Resource::Oil)
+		<< "\nUranium: " << this->getResource(Resource::Uranium)
+		<< std::endl;
 }
 
-void Player::assignOil(int num) {
-	this->oil = oil + num;
-	Map::Instance()->availableOil = Map::Instance()->availableOil - num;
+void Player::setResource(Resource r, int num) {
+	if (r == Resource::RESOURCE_COUNT) {
+		throw;
+	}
+	this->resources[r] = num;
 }
 
-void Player::assignGarbage(int num) {
-	this->garbage = garbage + num;
-	Map::Instance()->availableGarbage = Map::Instance()->availableGarbage - num;
+int Player::getResource(Resource r) {
+	if (r == Resource::RESOURCE_COUNT) {
+		throw;
+	}
+	return this->resources[r];
 }
-
-void Player::assignCoal(int num) {
-	this->coal = coal + num;
-	Map::Instance()->availableCoal = Map::Instance()->availableCoal - num;
-}
-
-void Player::assignUranium(int num) {
-	this->uranium = uranium + num;
-	Map::Instance()->availableUranium = Map::Instance()->availableUranium - num;
-}
-
-void Player::assignElektro(int num) {
-	this->elektro = elektro + num;
-	Map::Instance()->availableElektro = Map::Instance()->availableElektro - num;
-}
-

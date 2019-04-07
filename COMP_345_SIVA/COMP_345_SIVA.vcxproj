@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="City.cpp" />
+    <ClCompile Include="Colors.cpp" />
     <ClCompile Include="Driver.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="mapView.cpp" />
@@ -36,9 +37,12 @@
     <ClCompile Include="playerView.cpp" />
     <ClCompile Include="PowerPlant.cpp" />
     <ClCompile Include="powerPlantView.cpp" />
+    <ClCompile Include="Resources.cpp" />
+    <ClCompile Include="ResourceTable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="City.h" />
+    <ClInclude Include="Colors.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="mapView.h" />
     <ClInclude Include="Market.h" />
@@ -50,6 +54,8 @@
     <ClInclude Include="playerView.h" />
     <ClInclude Include="PowerPlant.h" />
     <ClInclude Include="powerPlantView.h" />
+    <ClInclude Include="Resources.h" />
+    <ClInclude Include="ResourceTable.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="data_fresh_copy.txt" />
