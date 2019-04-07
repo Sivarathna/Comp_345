@@ -1,43 +1,29 @@
 #pragma once
 #include<iostream>
+#include "Colors.h"
+#include "Resources.h"
 using std::string;
 
 class Player
 {
 private:
 	string name;
-	string color;
+	Color color;
 	int area;
 	int elektro;
-	int coal;
-	int garbage;
-	int oil;
-	int uranium;
+	int resources[Resource::RESOURCE_COUNT];
+
 public:
-	Player();
-	Player(string name);
-	Player(string name, string houseColor);
-	string getHouseColor();
+	Player(string name, Color houseColor);
+	Color getHouseColor();
 	~Player();
 	string getName() const;
 	int getArea();
 	void setArea(int a);
-	int getElektro();
 	
-	int getCoal();
-	
-	int getGarbage();
-	
-	int getOil();
-	
-	int getUranium();
+	int getResource(Resource r);
+	void setResource(Resource r, int num);
 
 	void getPlayerInfo();
-
-	void assignOil(int num);
-	void assignGarbage(int num);
-	void assignCoal(int num);
-	void assignUranium(int num);
-	void assignElektro(int num);
 };
 

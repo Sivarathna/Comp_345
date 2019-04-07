@@ -9,19 +9,12 @@ using std::vector;
 class City
 {
 private:
-	
+	int house[Color::COLOR_COUNT];
 
 public:
 	string cityName;
 	vector<City*> adjacentCities;
 	Player* owner;
-
-	int redHouse;
-	int greenHouse;
-	int blueHouse;
-	int purpleHouse;
-	int orangeHouse;
-	int yellowHouse;
 
 	City();
 	City(string cityName);
@@ -32,13 +25,8 @@ public:
 	string getCityName() const;
 	string getCityStatus();
 
-	void placeRedHouse();
-	void placeGreenHouse();
-	void placeBlueHouse();
-	void placePurpleHouse();
-	void placeOrangeHouse();
-	void placeYellowHouse();
-
+	void placeHouse(Color c);
+	int GetHouse(Color c);
 
 	void addAdjacentCity(City* city);
 	vector<City*> getAdjacentCities() const;

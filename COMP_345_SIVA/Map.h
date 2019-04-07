@@ -1,35 +1,26 @@
 #pragma once
-
 #include<iostream>
 #include<vector>
 #include"City.h"
 using std::string;
 using std::vector;
 
-// TODO: Make this singleton
 class Map
 {
 private:
+	int availableResource[Resource::RESOURCE_COUNT];
+	int availableHouses[Color::COLOR_COUNT];
 	vector<City*> cityList;
 	City* firstCity;
 	Map();
 
-
-
 	static Map* m_pInstance;
 public:
+	int GetAvailableHouses(Color c);
+	void SetAvailableHouses(Color c, int amount);
 
-	int availableRedHouses = 22;
-	int availableGreenHouses = 22;
-	int availableBlueHouses = 22;
-	int availablePurpleHouses = 22;
-	int availableOrangeHouses = 22;
-	int availableYellowHouses = 22;
-	int availableCoal = 24;
-	int availableOil = 24;
-	int availableGarbage = 24;
-	int availableUranium = 12;
-	int availableElektro = 100000;
+	int GetAvailableResource(Resource r);
+	void SetAvailableResource(Resource r, int num);
 
 	~Map();
 	static Map* Instance();

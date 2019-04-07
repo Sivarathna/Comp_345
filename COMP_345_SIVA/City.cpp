@@ -10,12 +10,10 @@ City::City()
 City::City(string cityName)
 {
 	this->cityName = cityName;
-	redHouse = 0;
-	greenHouse = 0;
-	blueHouse = 0;
-	purpleHouse = 0;
-	orangeHouse = 0;
-	yellowHouse = 0;
+
+	for (int i = 0; i < Color::COLOR_COUNT; i++) {
+		this->house[i] = 0;
+	}
 }
 
 City::City(string cityName, Player * player)
@@ -42,38 +40,23 @@ string City::getCityName() const
 }
 
 string City::getCityStatus() {
-	return ("\n" + cityName + " | Red House: " + std::to_string(redHouse) + " | Green House: " + std::to_string(greenHouse) + " | Blue House: " + std::to_string(blueHouse)
-		+ " | Purple House: " + std::to_string(purpleHouse) + " | Orange House: " + std::to_string(orangeHouse) + " | Yellow House: " + std::to_string(yellowHouse));
+	return ("\n" + cityName + " | red house: " + std::to_string(house[Color::Red]) + " | green house: " + std::to_string(house[Color::Green]) + " | blue house: " + std::to_string(house[Color::Blue])
+		+ " | Purple House: " + std::to_string(house[Color::Purple]) + " | Orange House: " + std::to_string(house[Color::Orange]) + " | Yellow House: " + std::to_string(house[Color::Yellow]));
 }
 
-void City::placeRedHouse() {
-	redHouse = 1;
-	Map::Instance()->availableRedHouses -=1;
+void City::placeHouse(Color c)
+{
+	this->house[c] = 1;
+	auto map = Map::Instance();
+	map->SetAvailableHouses(c, map->GetAvailableHouses(c) - 1);
 }
 
-void City::placeGreenHouse() {
-	greenHouse = 1;
-	Map::Instance()->availableGreenHouses -= 1;
-}
-
-void City::placeBlueHouse() {
-	blueHouse = 1;
-	Map::Instance()->availableBlueHouses -= 1;
-}
-
-void City::placePurpleHouse() {
-	purpleHouse = 1;
-	Map::Instance()->availablePurpleHouses -= 1;
-}
-
-void City::placeOrangeHouse() {
-	orangeHouse = 1;
-	Map::Instance()->availableOrangeHouses -= 1;
-}
-
-void City::placeYellowHouse() {
-	yellowHouse = 1;
-	Map::Instance()->availableYellowHouses -= 1;
+int City::GetHouse(Color c)
+{
+	if (c == Color::COLOR_COUNT) {
+		throw;
+	}
+	return this->house[c];
 }
 
 void City::addAdjacentCity(City* city)
@@ -89,12 +72,10 @@ vector<City*> City::getAdjacentCities() const
 void City::removeAdjacentCity(City * city)
 {
 	for (unsigned int i = 0; i < adjacentCities.size(); i++) {
-		if (adjacentCities.at(i) == city)
-		{
+		if (adjacentCities.at(i) == city) {
 			adjacentCities.erase(adjacentCities.begin() + i);
 		}
 	}
-
 }
 
 void City::setOwner(Player* player)

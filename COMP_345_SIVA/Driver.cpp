@@ -12,6 +12,7 @@ using namespace std;
 #include"Player.h"
 #include"PowerPlant.h"
 #include"OverviewCard.h"
+#include "ResourceTable.h"
 
 vector<PowerPlant*> deck; //Vector where all the powerplant and 'Step 3' card will be (Part 5)
 
@@ -87,46 +88,9 @@ bool readMapFromFile(Map* map, string file)
 void printPlayerNetwork(Player player, vector<City*> cityList) {
 	cout << "\n\nPlayer " + player.getName() + " has in his network:";
 
-	if (player.getHouseColor() == "red") {
-		for (int i = 0; i < cityList.size(); i++) {
-			if (cityList[i]->redHouse == 1) {
-				cout << "\n-" + cityList[i]->getCityName();
-			}
-		}
-	}
-	if (player.getHouseColor() == "blue") {
-		for (int i = 0; i < cityList.size(); i++) {
-			if (cityList[i]->blueHouse == 1) {
-				cout << "\n-" + cityList[i]->getCityName();
-			}
-		}
-	}
-	if (player.getHouseColor() == "green") {
-		for (int i = 0; i < cityList.size(); i++) {
-			if (cityList[i]->greenHouse == 1) {
-				cout << "\n-" + cityList[i]->getCityName();
-			}
-		}
-	}
-	if (player.getHouseColor() == "purple") {
-		for (int i = 0; i < cityList.size(); i++) {
-			if (cityList[i]->purpleHouse == 1) {
-				cout << "\n-" + cityList[i]->getCityName();
-			}
-		}
-	}
-	if (player.getHouseColor() == "orange") {
-		for (int i = 0; i < cityList.size(); i++) {
-			if (cityList[i]->orangeHouse == 1) {
-				cout << "\n-" + cityList[i]->getCityName();
-			}
-		}
-	}
-	if (player.getHouseColor() == "yellow") {
-		for (int i = 0; i < cityList.size(); i++) {
-			if (cityList[i]->yellowHouse == 1) {
-				cout << "\n-" + cityList[i]->getCityName();
-			}
+	for (auto city : cityList) {
+		if (city->GetHouse(player.getHouseColor())) {
+			cout << "\n-" + city->getCityName();
 		}
 	}
 }
@@ -157,10 +121,34 @@ int main()
 		cin >> number_of_players;
 	}
 
+	std::map<int, bool> availableColors;
+	for (int i = 0; i < Color::COLOR_COUNT; i++) {
+		availableColors[i] = true;
+	}
+
 	for (int i = 0; i < number_of_players; i++) {
 		cout << "Enter a name for player:" << i + 1 << endl;
 		cin >> player_name;
-		players.push_back(Player(player_name));
+
+		int playerColor = -1;
+		while (playerColor == -1) {
+			cout << "Enter a color for player:" << i + 1 << " Your options are:" << endl;
+			for (int ii = 0; ii < Color::COLOR_COUNT; ii++) {
+				if (availableColors[ii]) {
+					cout << " " << ii << ":" << GetColorName((Color)ii) << endl;
+				}
+			}
+			cin >> playerColor;
+
+			// If it's available, mark it as taken and exit.
+			if (availableColors[playerColor]) {
+				availableColors[playerColor] = false;
+				break;
+			}
+			playerColor = -1;
+		}
+
+		players.push_back(Player(player_name, (Color)playerColor));
 	}
 
 	//Each player chooses which area they will play in. 
@@ -180,6 +168,71 @@ int main()
 	}
 	cout << "-----------------------------------" << endl;
 	cout << endl;
+
+
+	while (true) {
+
+
+		// Buying phase.
+		cout << "THE TIME TO BUY IS NOW" << endl;
+		for (auto player : players) {
+			cout << player.getName() << "'s turn to buy" << endl;
+			
+
+			while (true) {
+				cout << endl;
+				cout << "You have: " << endl;
+				for (int i = 0; i < Resource::RESOURCE_COUNT; i++) {
+					cout << "  " << player.getResource((Resource)i) << " of " << GetResourceName((Resource)i) << endl;
+				}
+				cout << endl;
+
+				cout << "OPTIONS" << endl;
+				cout << " -1 - Done" << endl;
+				for (int i = 0; i < Resource::Elektro; i++) {
+					cout << " " << i << " - " << GetResourceName((Resource)i) << ": " << map->GetAvailableResource((Resource)i) << " for a cost of " << GetResourceCost((Resource)i, 1, number_of_players) << " each." << endl;
+				}
+				cout << endl;
+
+				cout << "Select the (number) resource that you want to buy, and then the quantity: ";
+				int choice;
+				int quantity;
+				cin >> choice;
+
+				if (choice < -1 || choice >= (int)Resource::Elektro) {
+					cout << "That's not a valid resource" << endl;
+					continue;
+				}
+				Resource r = (Resource)choice;
+
+				if (choice != -1) {
+					cin >> quantity;
+					if (map->GetAvailableResource(r) >= quantity) {
+						int cost = GetResourceCost(r, 1, number_of_players) * quantity;
+
+						if (player.getResource(Resource::Elektro) < cost) {
+							cout << "You can't buy that much." << endl;
+							continue;
+						}
+
+						player.setResource(r, quantity);
+						player.setResource(Resource::Elektro, player.getResource(Resource::Elektro) - cost);
+						map->SetAvailableResource(r, map->GetAvailableResource(r) - quantity);
+
+						cout << "Purchased " << quantity << " of " << GetResourceName(r) << " for " << cost << " Elektro." << endl;
+					}
+					else {
+						cout << "You can only buy " << map->GetAvailableResource(r) << " much." << endl;
+					}
+
+					continue;
+				}
+				cout << "Done" << endl;
+				break;
+			}
+
+		}
+	}
 
 	cout << endl;
 	system("PAUSE");
