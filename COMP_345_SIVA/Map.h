@@ -6,7 +6,7 @@
 using std::string;
 using std::vector;
 
-// TODO: Make this singleton
+//The Map class is made singleton
 class Map
 {
 private:

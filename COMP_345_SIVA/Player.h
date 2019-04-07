@@ -17,23 +17,19 @@ public:
 	Player();
 	Player(string name);
 	Player(string name, string houseColor);
-	string getHouseColor();
 	~Player();
+
+	string getHouseColor();
 	string getName() const;
 	int getArea();
-	void setArea(int a);
 	int getElektro();
-	
 	int getCoal();
-	
 	int getGarbage();
-	
 	int getOil();
-	
 	int getUranium();
-
 	void getPlayerInfo();
 
+	void setArea(int a);
 	void assignOil(int num);
 	void assignGarbage(int num);
 	void assignCoal(int num);

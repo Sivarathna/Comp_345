@@ -59,41 +59,30 @@ void Player::setArea(int player_area) {
 	area = player_area;
 }
 
-
 int Player::getElektro()
 {
 	return this->elektro;
 }
-
-
-
-
 
 int Player::getCoal()
 {
 	return this->coal;
 }
 
-
-
 int Player::getGarbage()
 {
 	return this->garbage;
 }
-
 
 int Player::getOil()
 {
 	return this->oil;
 }
 
-
-
 int Player::getUranium()
 {
 	return this->uranium;
 }
-
 
 void Player::getPlayerInfo()
 {

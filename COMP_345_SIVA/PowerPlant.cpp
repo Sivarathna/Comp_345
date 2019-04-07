@@ -12,6 +12,7 @@ PowerPlant::PowerPlant()
 	garbageRequired = 0;
 	uraniumRequired = 0;
 	hybridRequired = 0;
+	plantStatus = 0;
 }
 
 PowerPlant::PowerPlant(int plantNumber)
@@ -19,7 +20,7 @@ PowerPlant::PowerPlant(int plantNumber)
 	this->plantNumber = plantNumber;
 }
 
-PowerPlant::PowerPlant(int plantNumber, int powersCities, int coalRequired, int oilRequired, int garbageRequired, int uraniumRequired, int hybridRequired)
+PowerPlant::PowerPlant(int plantNumber, int powersCities, int coalRequired, int oilRequired, int garbageRequired, int uraniumRequired, int hybridRequired, int plantStatus)
 {
 	this->plantNumber = plantNumber;
 	this->powersCities = powersCities;
@@ -28,6 +29,7 @@ PowerPlant::PowerPlant(int plantNumber, int powersCities, int coalRequired, int 
 	this->garbageRequired = garbageRequired;
 	this->uraniumRequired = uraniumRequired;
 	this->hybridRequired = hybridRequired;
+	this->plantStatus = plantStatus;
 }
 
 PowerPlant::~PowerPlant()
@@ -45,4 +47,19 @@ void PowerPlant::setOwner(Player* name) {
 
 Player* PowerPlant::getOwner() {
 	return this->owner;
+}
+
+void PowerPlant::setPlantNumber(int v) {
+	this->plantNumber = v;
+}
+
+int PowerPlant::getPlantStatus() {
+	return plantStatus;
+}
+
+void PowerPlant::changePlantStatus() {
+	if (plantStatus == 0)
+		plantStatus = 1;
+	else if (plantStatus == 1)
+		plantStatus = -1;
 }
