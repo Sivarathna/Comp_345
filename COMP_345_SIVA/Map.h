@@ -5,6 +5,7 @@
 using std::string;
 using std::vector;
 
+//The Map class is made singleton
 class Map
 {
 private:

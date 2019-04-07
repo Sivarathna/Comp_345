@@ -16,7 +16,9 @@ private:
 public:
 	Player(string name, Color houseColor);
 	Color getHouseColor();
+
 	~Player();
+
 	string getName() const;
 	int getArea();
 	void setArea(int a);
