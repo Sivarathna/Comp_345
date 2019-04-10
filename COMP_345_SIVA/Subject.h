@@ -1,8 +1,9 @@
-#ifndef SUBJECT_H
-#define SUBJECT_H
+#pragma once
 #include <vector>
 #include "Observer.h"
 using namespace std;
+
+class Observer;
 
 
 //This abstract class is the superclass of all observaeable objects.
@@ -20,5 +21,3 @@ public:
 	virtual void notify(int j);
 	virtual void notifyAll();
 };
-
-#endif
