@@ -13,6 +13,7 @@ using namespace std;
 #include"PowerPlant.h"
 #include"OverviewCard.h"
 #include "ResourceTable.h"
+#include "Market.h"
 
 vector<PowerPlant*> deck; //Vector where all the powerplant and 'Step 3' card will be (Part 5)
 
@@ -99,12 +100,16 @@ void printPlayerNetwork(Player player, vector<City*> cityList) {
 vector<Player> GetStepOnePlayerOrder(Map& map, vector<Player>& players) {
 	// Determine player order.
 	auto cities = map.getCityList();
+	// Keeps track of the number of cities that we saw for each color.
+	// Map of Color -> int
+	// example, counters[RED] would store the number of red cities we saw.
 	auto counters = std::map<int, int>();
 
 	for (int i = 0; i < Color::COLOR_COUNT; i++) {
 		counters[i] = 0;
 	}
 
+	// Count the nunmber of houses in each city by their color.
 	for (auto city : cities) {
 		for (int i = 0; i < Color::COLOR_COUNT; i++) {
 			counters[i] += city->GetHouse((Color)i);
@@ -116,9 +121,13 @@ vector<Player> GetStepOnePlayerOrder(Map& map, vector<Player>& players) {
 		order.push_back(player);
 	}
 
-	std::sort(order.begin(), order.end(), [&](Player a, Player b) {
+	// Ampersand means that the outside variables are copied by reference.
+	// We need this because we need access to the COUNTERS variable.
+	auto sortingFunction = [&](Player a, Player b) {
 		return counters[a.getHouseColor()] > counters[b.getHouseColor()];
-	});
+	};
+
+	std::sort(order.begin(), order.end(), sortingFunction);
 	return order;
 }
 
@@ -129,6 +138,15 @@ int main()
 	int player_area;
 	string player_name;
 	vector<Player> players;
+	Market market;
+	vector<PowerPlant> allPowerPlantCards;
+
+	// Initialize power plant cards.
+	for (int i = 0; i < 43; i++) {
+		PowerPlant p;
+		p.setPlantNumber(i + 1);
+		allPowerPlantCards.push_back(p);
+	}
 
 	// creating a Map
 	//Map map = Map();
@@ -145,15 +163,19 @@ int main()
 		cin >> number_of_players;
 	}
 
+	// Keep track of which colors are available.
 	std::map<int, bool> availableColors;
 	for (int i = 0; i < Color::COLOR_COUNT; i++) {
+		// They are all available to begin with.
 		availableColors[i] = true;
 	}
 
+	// Pick a name and a color for EACH player.
 	for (int i = 0; i < number_of_players; i++) {
 		cout << "Enter a name for player:" << i + 1 << endl;
 		cin >> player_name;
 
+		// -1 means invalid choice.
 		int playerColor = -1;
 		while (playerColor == -1) {
 			cout << "Enter a color for player:" << i + 1 << " Your options are:" << endl;
@@ -167,6 +189,7 @@ int main()
 			// If it's available, mark it as taken and exit.
 			if (availableColors[playerColor]) {
 				availableColors[playerColor] = false;
+				// Break out of the while.
 				break;
 			}
 			playerColor = -1;
@@ -209,117 +232,8 @@ int main()
 		// PHASE 2:  Auction power plants.
 		//		a) pass (not available in round 1 of the game, player needs to buy a powerplant in the first round)
 		//		b) select plant for auction
-
-		char choice = ' ';
-		int powerPlantNum, bid, highestBid, currBidder;
-		bool chosenPlant, bid_1, bid_2, wonBid;
-
-		vector<Player> availablePlayers;
-		vector<Player> biddingPlayers;
-
-		for (auto player : players) {
-
-			if (currentRound > 1) {
-				//Keep asking player to auction if not in the first round
-				cout << "\n" << player.getName();
-				cout << ", would you like to auction a power plant? Y/N" << endl;
-				while (toupper(choice) != 'Y' || toupper(choice) != 'N') {
-					//get user input
-					cin >> choice;
-					if (cin.fail()) {
-						cin.clear();
-						cin.ignore();
-						choice = ' ';
-					}
-
-					if (toupper(choice) == 'Y') {
-						//add to available players vector if player is placing a power plant
-						availablePlayers.push_back(player);
-						for (int i = 0; i < availablePlayers.size(); i++) {
-							cout << "available Players are " << availablePlayers.at(i).getName() << endl;
-						}
-						break;
-					}
-
-					else if (toupper(choice) == 'N')
-						break;
-
-					else
-						cout << "Please try again..." << endl;
-					break;
-				}
-
-			}
-			else
-				availablePlayers.push_back(player);
-		}
-
-
-
-
-
-		////Loop for each player's turn to play
-		//int iterator_1 = 0;
-		//int i;
-
-		//while (availablePlayers.size() > 0) {
-		//	iterator_1 % players.size();
-		//}
-
-		////need to check if player is available for auctionning
-		//for (int a = 0; a < availablePlayers.size(); a++) {
-		//	if (availablePlayers[a].getName() == players.at(i).getName()) {
-
-		//		//TODO: display the power plant market
-		//		cout << "Power Plant Market:" << endl;
-
-		//		//TODO: display current player name and colour
-
-
-		//		chosenPlant = false;
-		//		//player chooses what power plant to auction
-		//		cout << "\nEnter the power plant do you want to auction: " << endl;
-		//		while (!chosenPlant) {
-		//			cin >> powerPlantNum;
-
-		//			//check if current player has enough electros in order to bid on the selected power plant
-		//			if (powerPlantNum > players.at(i).getElektro()) {
-		//				cout << "Unable to place that bid. You do not have enough electros.";
-		//				cout << "You currently have:" << players.at(i).getElektro() << " electros. Please try again!" << endl;
-		//			}
-
-		//			//TODO: check if input exists in current power plant and if it is in the actual market
-		//			//else if () {
-
-		//			//}
-		//			else
-		//				cout << "Wrong option. Try again" << endl;
-		//			
-		//		}
-		//		
-
-		//	}
-		//}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		market.replenishPowerPlants(allPowerPlantCards);
+		market.BidPowerPlants(players);
 
 		// Buying phase.
 		cout << "THE TIME TO BUY IS NOW" << endl;
@@ -328,6 +242,7 @@ int main()
 
 
 			while (true) {
+				// Print all the resources the player has.
 				cout << endl;
 				cout << "You have: " << endl;
 				for (int i = 0; i < Resource::RESOURCE_COUNT; i++) {
@@ -335,6 +250,7 @@ int main()
 				}
 				cout << endl;
 
+				// Show what they can do.
 				cout << "OPTIONS" << endl;
 				cout << " -1 - Done" << endl;
 				for (int i = 0; i < Resource::Elektro; i++) {
@@ -342,7 +258,7 @@ int main()
 				}
 				cout << endl;
 
-				cout << "Select the (number) resource that you want to buy, and then the quantity: ";
+				cout << "Select the (number) resource that you want to buy, and then the quantity (choiceNumber quantity): ";
 				int choice;
 				int quantity;
 				cin >> choice;

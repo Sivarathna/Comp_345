@@ -1,6 +1,6 @@
 #include "ResourceTable.h"
 
-int GetResourceCost(Resource r, int phase, int numberOfPlayers)
+int GetResourceCost(Resource r,	 int phase, int numberOfPlayers)
 {
 	// We assume number of players is not 0 based. Neither is phase.
 	phase -= 1;

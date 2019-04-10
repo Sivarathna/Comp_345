@@ -23,9 +23,20 @@
     <ClCompile Include="Colors.cpp" />
     <ClCompile Include="Driver.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="mapView.cpp" />
+    <ClCompile Include="Market.cpp" />
+    <ClCompile Include="marketView.cpp" />
+    <ClCompile Include="Observable.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Observer.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="OverviewCard.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="playerView.cpp" />
     <ClCompile Include="PowerPlant.cpp" />
+    <ClCompile Include="powerPlantView.cpp" />
     <ClCompile Include="Resources.cpp" />
     <ClCompile Include="ResourceTable.cpp" />
   </ItemGroup>
@@ -33,9 +44,16 @@
     <ClInclude Include="City.h" />
     <ClInclude Include="Colors.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="mapView.h" />
+    <ClInclude Include="Market.h" />
+    <ClInclude Include="marketView.h" />
+    <ClInclude Include="Observable.h" />
+    <ClInclude Include="Observer.h" />
     <ClInclude Include="OverviewCard.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="playerView.h" />
     <ClInclude Include="PowerPlant.h" />
+    <ClInclude Include="powerPlantView.h" />
     <ClInclude Include="Resources.h" />
     <ClInclude Include="ResourceTable.h" />
   </ItemGroup>
@@ -47,32 +65,32 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{AF555867-C7A3-4C86-AB94-ADE90F639998}</ProjectGuid>
     <RootNamespace>COMP_345_SIVA</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
