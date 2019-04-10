@@ -26,7 +26,7 @@
     <ClCompile Include="mapView.cpp" />
     <ClCompile Include="Market.cpp" />
     <ClCompile Include="marketView.cpp" />
-    <ClCompile Include="Observable.cpp">
+    <ClCompile Include="Subject.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Observer.cpp">
@@ -47,7 +47,7 @@
     <ClInclude Include="mapView.h" />
     <ClInclude Include="Market.h" />
     <ClInclude Include="marketView.h" />
-    <ClInclude Include="Observable.h" />
+    <ClInclude Include="Subject.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="OverviewCard.h" />
     <ClInclude Include="Player.h" />
@@ -65,7 +65,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{AF555867-C7A3-4C86-AB94-ADE90F639998}</ProjectGuid>
     <RootNamespace>COMP_345_SIVA</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -84,7 +84,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">

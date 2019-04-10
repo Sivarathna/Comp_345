@@ -5,9 +5,16 @@
 
 mapView::mapView()
 {
+	numberOfPurchases = 0;
 }
 
 mapView::~mapView()
 {
+}
+
+void mapView::update(Subject * s)
+{
+	numberOfPurchases++;
+	cout << "Total number of purchases were: " << numberOfPurchases << endl;
 }
 

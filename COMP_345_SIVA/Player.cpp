@@ -31,6 +31,13 @@ int Player::getArea() {
 	return area;
 }
 
+void Player::setIsPlaying(bool a)
+{
+	isPlaying = a;
+	//notify all the observers for the player 
+	notifyAll();
+}
+
 void Player::setArea(int player_area) {
 	area = player_area;
 }
@@ -59,4 +66,9 @@ int Player::getResource(Resource r) {
 		throw;
 	}
 	return this->resources[r];
+}
+
+bool Player::getIsPlaying()
+{
+	return isPlaying;
 }

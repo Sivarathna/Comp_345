@@ -1,5 +1,4 @@
-#ifndef PLAYER_V_H
-#define PLAYER_V_H
+#pragma once
 #include "Observer.h"
 #include "Map.h"
 #include "PowerPlant.h"
@@ -21,7 +20,6 @@ class playerView : public Observer
 public:
 	playerView();
 	~playerView();
-	//void update(Observable* ob, int j);
+	void update(Subject* ob);
 };
 
-#endif
