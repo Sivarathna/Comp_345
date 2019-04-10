@@ -2,9 +2,11 @@
 #include<iostream>
 #include "Colors.h"
 #include "Resources.h"
+#include "Subject.h"
+
 using std::string;
 
-class Player
+class Player : public Subject
 {
 private:
 	string name;
@@ -12,6 +14,7 @@ private:
 	int area;
 	int elektro;
 	int resources[Resource::RESOURCE_COUNT];
+	bool isPlaying;
 
 public:
 	Player(string name, Color houseColor);
@@ -21,11 +24,14 @@ public:
 
 	string getName() const;
 	int getArea();
-	void setArea(int a);
-	
+	void getPlayerInfo();
 	int getResource(Resource r);
+	bool getIsPlaying();
+
+	void setIsPlaying(bool a);
+	void setArea(int a);
 	void setResource(Resource r, int num);
 
-	void getPlayerInfo();
+
 };
 

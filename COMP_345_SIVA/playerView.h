@@ -21,7 +21,7 @@ class playerView : public Observer
 public:
 	playerView();
 	~playerView();
-	//void update(Observable* ob, int j);
+	void update(Subject* ob);
 };
 
 #endif

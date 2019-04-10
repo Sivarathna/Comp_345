@@ -1,5 +1,4 @@
-#ifndef MAP_V_H
-#define MAP_V_H
+#pragma once
 #include "Observer.h"
 #include "City.h"
 #include "Map.h"
@@ -16,10 +15,11 @@
 
 class mapView : public Observer
 {
+private:
+	int numberOfPurchases;
+
 public:
 	mapView();
 	~mapView();
-
+	void update(Subject* s);
 };
-
-#endif

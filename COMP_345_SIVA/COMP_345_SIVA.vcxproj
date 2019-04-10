@@ -24,9 +24,7 @@
     <ClCompile Include="Driver.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="mapView.cpp" />
-    <ClCompile Include="Market.cpp" />
-    <ClCompile Include="marketView.cpp" />
-    <ClCompile Include="Observable.cpp">
+    <ClCompile Include="Subject.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Observer.cpp">
@@ -36,7 +34,6 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="playerView.cpp" />
     <ClCompile Include="PowerPlant.cpp" />
-    <ClCompile Include="powerPlantView.cpp" />
     <ClCompile Include="Resources.cpp" />
     <ClCompile Include="ResourceTable.cpp" />
   </ItemGroup>
@@ -45,15 +42,12 @@
     <ClInclude Include="Colors.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="mapView.h" />
-    <ClInclude Include="Market.h" />
-    <ClInclude Include="marketView.h" />
-    <ClInclude Include="Observable.h" />
+    <ClInclude Include="Subject.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="OverviewCard.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="playerView.h" />
     <ClInclude Include="PowerPlant.h" />
-    <ClInclude Include="powerPlantView.h" />
     <ClInclude Include="Resources.h" />
     <ClInclude Include="ResourceTable.h" />
   </ItemGroup>

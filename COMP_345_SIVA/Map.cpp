@@ -66,6 +66,14 @@ void Map::SetAvailableResource(Resource r, int num) {
 	this->availableResource[r] = num;
 }
 
+void Map::buyResource(Resource r, int qty, Player & p, int c)
+{
+	p.setResource(r, qty);
+	p.setResource(Resource::Elektro, p.getResource(Resource::Elektro) - c);
+	SetAvailableResource(r, GetAvailableResource(r) - qty);
+	notifyAll();
+}
+
 
 Map::~Map()
 {

@@ -5,8 +5,8 @@
 using std::string;
 using std::vector;
 
-//The Map class is made singleton
-class Map
+//The Map class is made singleton and observaeble
+class Map: public Subject
 {
 private:
 	int availableResource[Resource::RESOURCE_COUNT];
@@ -22,6 +22,8 @@ public:
 
 	int GetAvailableResource(Resource r);
 	void SetAvailableResource(Resource r, int num);
+
+	void buyResource(Resource r, int qty, Player& p, int c);
 
 	~Map();
 	static Map* Instance();

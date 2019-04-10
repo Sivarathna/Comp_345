@@ -13,6 +13,9 @@ using namespace std;
 #include"PowerPlant.h"
 #include"OverviewCard.h"
 #include "ResourceTable.h"
+#include "mapView.h"
+#include "playerView.h"
+#include "Observer.h"
 
 vector<PowerPlant*> deck; //Vector where all the powerplant and 'Step 3' card will be (Part 5)
 
@@ -129,10 +132,14 @@ int main()
 	int player_area;
 	string player_name;
 	vector<Player> players;
+	playerView playerViewer;
+	mapView mapViewer;
+
 
 	// creating a Map
 	//Map map = Map();
 	Map* map = Map::Instance();
+	map->attach(&mapViewer);
 	//Select and load a map from list of files in a directory
 	cout << "Enter the name of the map to use for the game (.txt file): " << endl;
 	cin >> map_name;
@@ -173,6 +180,7 @@ int main()
 		}
 
 		players.push_back(Player(player_name, (Color)playerColor));
+		players.at(players.size() - 1).attach(&playerViewer);
 	}
 
 	//Each player chooses which area they will play in. 
@@ -326,6 +334,9 @@ int main()
 		for (auto player : players) {
 			cout << player.getName() << "'s turn to buy" << endl;
 
+			//set the turn for the player
+			player.setIsPlaying(true);
+
 
 			while (true) {
 				cout << endl;
@@ -363,10 +374,10 @@ int main()
 							continue;
 						}
 
-						player.setResource(r, quantity);
+						/*player.setResource(r, quantity);
 						player.setResource(Resource::Elektro, player.getResource(Resource::Elektro) - cost);
-						map->SetAvailableResource(r, map->GetAvailableResource(r) - quantity);
-
+						map->SetAvailableResource(r, map->GetAvailableResource(r) - quantity);*/
+						map->buyResource(r, quantity, player, cost);
 						cout << "Purchased " << quantity << " of " << GetResourceName(r) << " for " << cost << " Elektro." << endl;
 					}
 					else {
@@ -379,6 +390,8 @@ int main()
 				break;
 			}
 
+
+			player.setIsPlaying(false);
 		}
 	}
 
